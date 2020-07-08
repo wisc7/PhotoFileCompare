@@ -37,6 +37,7 @@ def selectfolderCompare():
 def loadListbox(a, b, c):
     try: #cant get it if its the first time loaded, get it from the default.
         infilepath = DirectoryValue.get()
+        infilepath = infilepath.replace('\\','/')
         if (infilepath[-1:])!='/':
                 infilepath = infilepath + '/'
         if (DirectoryValue.get() == ''):
@@ -53,6 +54,7 @@ def loadListbox(a, b, c):
             dle.insert(counter, value)
             if (compare):
                 for element in ([x[1]+'/'+x[0] for x in compfiles if x[0] == value]): #file exists in the compare directory
+                    element = element.replace('\\','/')
                     if (os.path.getsize(infilepath+value) ==  os.path.getsize(element)): #check if size is the same
                         if (infilepath.lower()+value.lower() != element.lower()): #check that they arent the same file.
                             dle.itemconfig(counter, foreground="red")
@@ -86,7 +88,7 @@ def selecteditem(a):
 #impose index over picture
 #------------------------------------------------------------------------------------
     if (dle.curselection()):  #something is actually selected. (nothing selected if they click out of the selection box into another selection box
-        if (DirectoryValue.get()[-1:])=='/':
+        if (DirectoryValue.get()[-1:]=='/' or DirectoryValue.get()[-1:]=='\\'):
             pad = ''
         else:
             pad = '/'
@@ -107,12 +109,14 @@ def selecteditem(a):
             PicPanel.configure(image = img)
             img.photo_ref = img    
         source = DirectoryValue.get()+pad+dle.get(dle.curselection())
+        source = source.replace('\\','/')
         sourcefile = dle.get(dle.curselection())
         mle.delete(0, END)
         mle.insert(0, 'Source: '+ source)
         counter = 1 # want to enter into the second box as 0 is already take with the source file.
         #search for found pic in compare folder.
         for element in ([x[1]+'/'+x[0] for x in compfiles if x[0] == sourcefile]):
+            element = element.replace('\\','/')
             if (os.path.getsize(source) ==  os.path.getsize(element)): #check if size is the same
                 if (source.lower() != element.lower()): #check that they arent the same file. - this needs some work.
                     mle.insert(counter, 'Found: '+element)
@@ -233,4 +237,3 @@ cbb.pack(side = LEFT)
 
 #go!
 MW.mainloop()
-
