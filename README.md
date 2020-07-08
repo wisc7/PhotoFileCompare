@@ -5,4 +5,4 @@ Compare 2 directory for duplicate files. (including recursive directory search) 
 Also contains a preview of image files.
 
 could use a polish add some features/ add some extra smarts (eg open files externally, copy paste etc) 
-Seems to have some issues with RAW files, (EG NEF files crash)
+Seems to have some issues with RAW files, (EG NEF files resizing etc.)
