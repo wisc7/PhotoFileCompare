@@ -99,7 +99,10 @@ def selecteditem(a):
             #img.width * X = 800
             multiplier = img.width / PicWidth
             size = (round(img.width / multiplier), round(img.height / multiplier))
-            img = img.resize(size, Image.ANTIALIAS)
+            try:
+                img = img.resize(size, Image.ANTIALIAS) #causes issues with NEF files
+            except:
+                pass #just do the inital size.
             img = ImageTk.PhotoImage(img)
             PicPanel.configure(image = img)
             img.photo_ref = img    
