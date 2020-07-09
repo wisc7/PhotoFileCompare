@@ -5,6 +5,11 @@ from PIL import ImageTk, Image
 import tkinter.messagebox
 import tkinter
 
+#could also do a full file comparison by using the following two lines:
+#import filecmp
+#filecmp.cmp(infilepath+value, element) #move this line to line 63 - (will be extremly slow opening new folders) and/or
+#filecmp.cmp(source, element) #line 125 (will be slower when clicking on a file( specially larger files)
+
 from os import listdir
 import os
 
@@ -20,8 +25,6 @@ PicWidth = 800 #determines the picture size (should probably put this in an ini 
 counter = 0
 compfiles = []
 compare = True
-
-
 
 
 #functions
